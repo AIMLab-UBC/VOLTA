@@ -1,4 +1,12 @@
-# Volta Source Code
+# VOLTA: an Environment-Aware Contrastive Cell Representation Learning for Histopathology
+
+## Introduction
+
+In clinical practice, many diagnosis tasks rely on the identification of cells in histopathology images. While supervised machine learning techniques require labels, providing manual cell annotations is time-consuming due to the large number of cells. In this paper, we propose a self-supervised framework (VOLTA) for cell representation learning in histopathology images using a novel technique that accounts for the cell’s mutual relationship with its environment for improved cell representations. We subjected our model to extensive experiments on the data collected from multiple institutions around the world comprising of over 800,000 cells, six cancer types, and cell types ranging from two to six categories for each dataset. The results show that our model outperforms the state-of-the-art models in cell representation learning. To showcase the potential power of our proposed framework, we applied VOLTA to ovarian and endometrial cancers with very small sample sizes (10-20 samples) and demonstrated that our cell representations can be utilized to identify the known histotypes of ovarian cancer and provide novel insights that link histopathology and molecular subtypes of endometrial cancer. Unlike supervised deep learning models that require large sample sizes for training, we provide a framework that can empower new discoveries without any annotation data in situations where sample sizes are limited. This repository is a Pytorch implementation of this model.
+
+
+[[paper (Nature Communications)](https://arxiv.org/pdf/2303.04696.pdf)]
+
 
 ## Requirements
 
@@ -9,9 +17,19 @@ As the first step, please use the `requirement.txt` file to install the requirem
 pip install -r requirements.txt
 ```
 
+## Data Prepration
+
+To prepare the data, after extracting patches from the whole slide image, you can use the `convertor.py` code with the appropriate flags within the patch2cell directory (use the help function to see the flags):
+
+```
+cd patch2cell
+python convertor.py
+```
+
+
 ## Run
 
-To run the code, first create a data folder and add the data to it. It should contain a folder with dataset name, two subfolders of train and test. Then, you can use the below command and adjust the configs to run the code.
+To run the code, first create a data folder and add the above generaeted data to it. It should contain a folder with dataset name, two subfolders of train and test. Then, you can use the below command and adjust the configs to run the code.
 
 
 ```
@@ -55,4 +73,16 @@ Below are the available configs.
 - **--mlp-embedding**: Add MLP head as an extra embedding layer.
 - **--aug-plus**: Use moco v2 data augmentation.
 
+```
+
+
+## Citation
+
+```
+@article{nakhli2023volta,
+  title={Volta: an environment-aware contrastive cell representation learning for histopathology},
+  author={Nakhli, Ramin and Zhang, Allen and Farahani, Hossein and Darbandsari, Amirali and Shenasa, Elahe and Thiessen, Sidney and Milne, Katy and McAlpine, Jessica and Nelson, Brad and Gilks, C Blake and others},
+  journal={arXiv preprint arXiv:2303.04696},
+  year={2023}
+}
 ```
