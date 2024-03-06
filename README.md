@@ -75,6 +75,10 @@ Below are the available configs.
 
 ```
 
+## License
+
+This repository is protected by https://creativecommons.org/licenses/by-nc/4.0/deed.en
+
 
 ## Citation
 
