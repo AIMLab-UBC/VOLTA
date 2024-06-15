@@ -46,16 +46,16 @@ import moco.loader
 import moco.mocov3.builder
 from dataset.consep import transform as consep_dataset
 from dataset.consep.dataset import CoNSePDataset
-from dataset.mcic import transform as mcic_dataset
-from dataset.mcic.dataset import MCICDataset
+from dataset.oracle import transform as oracle_dataset
+from dataset.oracle.dataset import OracleDataset
 from dataset.nucls import transform as nucls_dataset
 from dataset.nucls.dataset import NuCLSDataset
 from dataset.pannuke import transform as pannuke_dataset
 from dataset.pannuke.dataset import PanNukeDataset
 from dataset.lizard import transform as lizard_dataset
 from dataset.lizard.dataset import LizardDataset
-from dataset.elahe import transform as elahe_dataset
-from dataset.elahe.dataset import ElaheDataset
+from dataset.sarcoma import transform as sarcoma_dataset
+from dataset.sarcoma.dataset import SarcomaDataset
 from dataset.ovarian import transform as ovarian_dataset
 from dataset.ovarian.dataset import OvarianDataset
 from dataset.tools import collate_fn
@@ -651,10 +651,10 @@ def get_dataset(config: dict, test_dir: str, train_dir: str):
                                     cache_patch=not config['disable_cache'],
                                     shared_dictionaries=test_shared_dictionaries)
 
-    elif config['dataset'] == 'elahe':
+    elif config['dataset'] == 'sarcoma':
         # add image normalization to train and test transformations
         normalization = [
-            elahe_dataset.get_cell_normalization(),
+            sarcoma_dataset.get_cell_normalization(),
             ToTensorV2(transpose_mask=True)
         ]
         image_augmentation.extend(normalization)
@@ -662,16 +662,16 @@ def get_dataset(config: dict, test_dir: str, train_dir: str):
 
         # add patch normalization to train and test transformations
         patch_normalization = [
-            elahe_dataset.get_patch_normalization(config['patch_size']),
+            sarcoma_dataset.get_patch_normalization(config['patch_size']),
             ToTensorV2(transpose_mask=True)
         ]
         patch_train_augmentation.extend(patch_normalization)
         patch_test_augmentation.extend(patch_normalization)
 
-        train_dataset = ElaheDataset(train_dir,
+        train_dataset = SarcomaDataset(train_dir,
                                      transform=moco.loader.TwoCropsTransform(
                                          *compose_augmentations(image_augmentation, config['multi_crop'])),
-                                     target_transform=elahe_dataset.LabelTransform(n_classes=config['n_classes']),
+                                     target_transform=sarcoma_dataset.LabelTransform(n_classes=config['n_classes']),
                                      patch_transform=moco.loader.TwoCropsTransform(
                                          *compose_augmentations(patch_train_augmentation, config['multi_crop'])),
                                      patch_size=config['patch_size'],
@@ -681,9 +681,9 @@ def get_dataset(config: dict, test_dir: str, train_dir: str):
                                      valid_labels=config['valid_labels'],
                                      cache_patch=not config['disable_cache'],
                                      shared_dictionaries=train_shared_dictionaries)
-        test_dataset = ElaheDataset(test_dir,
+        test_dataset = SarcomaDataset(test_dir,
                                     transform=albumentations.Compose(test_transforms),
-                                    target_transform=elahe_dataset.LabelTransform(n_classes=config['n_classes']),
+                                    target_transform=sarcoma_dataset.LabelTransform(n_classes=config['n_classes']),
                                     patch_transform=albumentations.Compose(patch_test_augmentation),
                                     patch_size=config['patch_size'],
                                     mask_ratio=config['mask_ratio'],
@@ -774,10 +774,10 @@ def get_dataset(config: dict, test_dir: str, train_dir: str):
                                     cache_patch=not config['disable_cache'],
                                     shared_dictionaries=test_shared_dictionaries)
 
-    elif config['dataset'] == 'mcic':
+    elif config['dataset'] == 'oracle':
         # add image normalization to train and test transformations
         normalization = [
-            mcic_dataset.get_cell_normalization(),
+            oracle_dataset.get_cell_normalization(),
             ToTensorV2(transpose_mask=True)
         ]
         image_augmentation.extend(normalization)
@@ -785,16 +785,16 @@ def get_dataset(config: dict, test_dir: str, train_dir: str):
 
         # add patch normalization to train and test transformations
         patch_normalization = [
-            mcic_dataset.get_patch_normalization(config['patch_size']),
+            oracle_dataset.get_patch_normalization(config['patch_size']),
             ToTensorV2(transpose_mask=True)
         ]
         patch_train_augmentation.extend(patch_normalization)
         patch_test_augmentation.extend(patch_normalization)
 
-        train_dataset = MCICDataset(train_dir,
+        train_dataset = OracleDataset(train_dir,
                                     transform=moco.loader.TwoCropsTransform(
                                         *compose_augmentations(image_augmentation, config['multi_crop'])),
-                                    target_transform=mcic_dataset.LabelTransform(n_classes=config['n_classes']),
+                                    target_transform=oracle_dataset.LabelTransform(n_classes=config['n_classes']),
                                     patch_transform=moco.loader.TwoCropsTransform(
                                         *compose_augmentations(patch_train_augmentation, config['multi_crop'])),
                                     patch_size=config['patch_size'],
@@ -804,9 +804,9 @@ def get_dataset(config: dict, test_dir: str, train_dir: str):
                                     valid_labels=config['valid_labels'],
                                     cache_patch=not config['disable_cache'],
                                     shared_dictionaries=train_shared_dictionaries)
-        test_dataset = MCICDataset(test_dir,
+        test_dataset = OracleDataset(test_dir,
                                    transform=albumentations.Compose(test_transforms),
-                                   target_transform=mcic_dataset.LabelTransform(n_classes=config['n_classes']),
+                                   target_transform=oracle_dataset.LabelTransform(n_classes=config['n_classes']),
                                    patch_transform=albumentations.Compose(patch_test_augmentation),
                                    patch_size=config['patch_size'],
                                    mask_ratio=config['mask_ratio'],

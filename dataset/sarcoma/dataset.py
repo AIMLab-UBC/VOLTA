@@ -30,7 +30,7 @@ def _get_file_name(file):
     return os.path.splitext(os.path.split(file)[1])[0]
 
 
-class ElaheDataset(Dataset):
+class SarcomaDataset(Dataset):
     """CoNSep dataset."""
 
     def __init__(self, root_dir, transform=None, target_transform=None, patch_transform=None, patch_size=None,
@@ -42,7 +42,7 @@ class ElaheDataset(Dataset):
             transform (callable, optional): Optional transform to be applied
                 on a sample.
         """
-        super(ElaheDataset, self).__init__()
+        super(SarcomaDataset, self).__init__()
         # todo: make this faster by taking a pickle file
         images_path = os.path.join(root_dir, 'Images')
         labels_path = os.path.join(root_dir, 'Labels')

@@ -17,7 +17,7 @@ As the first step, please use the `requirement.txt` file to install the requirem
 pip install -r requirements.txt
 ```
 
-## Data Prepration
+## Data Preparation
 
 To prepare the data, after extracting patches from the whole slide image, you can use the `convertor.py` code with the appropriate flags within the patch2cell directory (use the help function to see the flags):
 
