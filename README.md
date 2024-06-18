@@ -27,6 +27,16 @@ python convertor.py
 ```
 
 
+## Pretrained weights
+
+The pretrained weights for the model can be found in `pretrained_weights` folder.
+
+
+## Inference
+
+The pretrained models can be found in the `pretrained_weights` folder, separated based on the dataset. To facilitate the inference process, the `volta_inference.ipynb` has been added to the repository. Please follow the instructions in this notebook to perform inference on the prepared data in the previous stage.
+
+
 ## Run
 
 To run the code, first create a data folder and add the above generaeted data to it. It should contain a folder with dataset name, two subfolders of train and test. Then, you can use the below command and adjust the configs to run the code.
@@ -74,10 +84,6 @@ data: Path to the dataset.
 --aug-plus: Use moco v2 data augmentation.
 
 ```
-
-
-## Pretrained weights
-The pretrained weights for the model can be found in `pretrained_weights` folder.
 
 
 ## License
