@@ -42,12 +42,12 @@ This command extracts all the cells and structures the dataset automatically. Th
 
 ## Pretrained weights
 
-The pretrained weights for the model can be found in `pretrained_weights` folder.
+The pretrained weights for the model can be found in following link on Google Drive [link](https://drive.google.com/drive/folders/1GK0IMVFdqny3QEbqtJh4FyP-xGoho-MW?usp=sharing).
 
 
 ## Inference
 
-The pretrained models can be found in the `pretrained_weights` folder, separated based on the dataset. To facilitate the inference process, the `volta_inference.ipynb` has been added to the repository. Please follow the instructions in this notebook to perform inference on the prepared data in the previous stage.
+To facilitate the inference process, the `volta_inference.ipynb` has been added to the repository. Please follow the instructions in this notebook to perform inference on the prepared data in the previous stage.
 
 
 ## Run
